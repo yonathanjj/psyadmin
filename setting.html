@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="setting.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="setting.js" defer></script>
+</head>
+<body class="admin-panel" x-data="{ isOpen: false }">
+<!-- Hamburger Menu for Mobile -->
+<button class="hamburger" @click="isOpen = !isOpen">
+    ☰
+</button>
+
+<!-- Sidebar -->
+<div class="sidebar" :class="{ 'open': isOpen }">
+    <div class="logo">
+        <a href="#">
+            <img src="psy.png" alt="Admin Logo"> <!-- Add your logo image here -->
+        </a>
+    </div>
+
+    <!-- Sidebar navigation links with Alpine.js state for active page -->
+    <nav class="nav-links" x-data="{ activePage: window.location.pathname.split('/').pop().split('.')[0] }">
+        <a href="dashboard.html"
+           :class="{ 'active': activePage === 'dashboard' }"
+           @click="activePage = 'dashboard'">Dashboard</a>
+        <a href="tickets.html"
+           :class="{ 'active': activePage === 'tickets' }"
+           @click="activePage = 'tickets'">Tickets</a>
+        <a href="events.html"
+           :class="{ 'active': activePage === 'events' }"
+           @click="activePage = 'events'">Events Management</a>
+        <a href="qr.html"
+           :class="{ 'active': activePage === 'scanner' }"
+           @click="activePage = 'scanner'">QR Code Scanner</a>
+        <a href="setting.html"
+           :class="{ 'active': activePage === 'settings' }"
+           @click="activePage = 'setting'">Setting</a>
+    </nav>
+
+    <footer class="sidebar-footer">
+        &copy; 2024 Admin Panel
+    </footer>
+</div>
+
+<!-- Main Content -->
+<main class="content">
+    <h1>Settings</h1>
+
+    <!-- General Settings Section -->
+    <section class="settings-section" id="general-settings">
+        <h2>General Settings</h2>
+        <form id="general-settings-form">
+            <label for="app-name">App Name <span class="required">*</span></label>
+            <input type="text" id="app-name" name="app-name" placeholder="Enter App Name" value="EventMaster">
+            <span id="app-name-error" class="error-message"></span>
+
+            <label for="logo">Logo</label>
+            <input type="file" id="logo" name="logo">
+
+            <label for="contact-email">Contact Email <span class="required">*</span></label>
+            <input type="email" id="contact-email" name="contact-email" value="support@eventmaster.com">
+            <span id="contact-email-error" class="error-message"></span>
+
+            <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+    </section>
+
+    <!-- User Management Section -->
+    <section class="settings-section" id="user-management">
+        <h2>User Management</h2>
+        <form id="user-management-form">
+            <label for="user-email">User Email <span class="required">*</span></label>
+            <input type="email" id="user-email" name="user-email" placeholder="Enter User Email">
+            <span id="user-email-error" class="error-message"></span>
+
+            <label for="user-role">Role</label>
+            <select id="user-role" name="user-role">
+                <option value="admin">Admin</option>
+                <option value="staff">Staff</option>
+            </select>
+
+            <button type="submit" class="save-btn">Add User</button>
+        </form>
+
+        <h3>Existing Users</h3>
+        <ul id="user-list">
+            <li>John Doe - Admin <button class="remove-user-btn">Remove</button></li>
+            <li>Jane Smith - Staff <button class="remove-user-btn">Remove</button></li>
+        </ul>
+    </section>
+
+    <!-- Notification Settings Section -->
+    <section class="settings-section" id="notifications">
+        <h2>Notification Settings</h2>
+        <form id="notification-settings-form">
+            <label for="email-notifications">Email Notifications</label>
+            <input type="checkbox" id="email-notifications" name="email-notifications" checked>
+
+            <label for="sms-notifications">SMS Notifications</label>
+            <input type="checkbox" id="sms-notifications" name="sms-notifications">
+
+            <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+    </section>
+
+    <!-- Security Settings Section -->
+    <section class="settings-section" id="security">
+        <h2>Security Settings</h2>
+        <form id="security-settings-form">
+            <label for="password-policy">Password Policy</label>
+            <input type="text" id="password-policy" name="password-policy" placeholder="Password Complexity (e.g. at least 8 characters)">
+
+            <label for="2fa">Enable Two-Factor Authentication</label>
+            <input type="checkbox" id="2fa" name="2fa">
+
+            <button type="submit" class="save-btn">Save Security Settings</button>
+        </form>
+    </section>
+</main>
+
+
+</body>
+</html>

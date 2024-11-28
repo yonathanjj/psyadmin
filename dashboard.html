@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="dashboard.js"></script>
+</head>
+<body class="admin-panel" x-data="{ isOpen: false }">
+<!-- Hamburger Menu for Mobile -->
+<button class="hamburger" @click="isOpen = !isOpen">
+    ☰
+</button>
+
+<!-- Sidebar -->
+<div class="sidebar" :class="{ 'open': isOpen }">
+    <div class="logo">
+        <a href="#">
+            <img src="psy.png" alt="Admin Logo"> <!-- Add your logo image here -->
+        </a>
+    </div>
+
+    <!-- Sidebar navigation links with Alpine.js state for active page -->
+    <nav class="nav-links" x-data="{ activePage: window.location.pathname.split('/').pop().split('.')[0] }">
+        <a href="dashboard.html"
+           :class="{ 'active': activePage === 'dashboard' }"
+           @click="activePage = 'dashboard'">Dashboard</a>
+        <a href="tickets.html"
+           :class="{ 'active': activePage === 'tickets' }"
+           @click="activePage = 'tickets'">Tickets</a>
+        <a href="eventsmanagment.html"
+           :class="{ 'active': activePage === 'events' }"
+           @click="activePage = 'events'">Events Management</a>
+        <a href="qr.html"
+           :class="{ 'active': activePage === 'scanner' }"
+           @click="activePage = 'qr'">QR Code Scanner</a>
+        <a href="setting.html"
+           :class="{ 'active': activePage === 'settings' }"
+           @click="activePage = 'setting'">Setting</a>
+    </nav>
+
+    <footer class="sidebar-footer">
+        &copy; 2024 Admin Panel
+    </footer>
+</div>
+
+
+<!-- Main Content -->
+<main class="content">
+    <h1>Welcome to the Admin Panel</h1>
+    <section id="hero-updater" class="dashboard-section">
+        <h2>Hero Image Updater</h2>
+        <div class="form-group">
+            <label for="hero-image">Upload Hero Image:</label>
+            <input type="file" id="hero-image" name="hero-image" accept="image/*">
+            <button id="hero-upload-btn">Upload</button>
+        </div>
+    </section>
+
+    <section id="music-updater" class="dashboard-section">
+        <h2>Music Section Updater</h2>
+        <div class="form-group">
+            <label for="music-title">Title:</label>
+            <input type="text" id="music-title" placeholder="Enter music title">
+
+            <label for="music-artist">Artist:</label>
+            <input type="text" id="music-artist" placeholder="Enter artist name">
+
+            <label for="music-image">Upload Cover Image:</label>
+            <input type="file" id="music-image" name="music-image" accept="image/*">
+
+            <label for="music-audio">Upload Audio:</label>
+            <input type="file" id="music-audio" name="music-audio" accept="audio/*">
+
+            <button id="music-upload-btn">Add Music</button>
+        </div>
+        <div id="music-preview" class="preview-container">
+            <p>No music added yet.</p>
+        </div>
+    </section>
+
+    <section id="gallery-updater" class="dashboard-section">
+        <h2>Gallery Image Adder</h2>
+        <div class="form-group">
+            <label for="gallery-image">Upload Gallery Images:</label>
+            <input type="file" id="gallery-image" name="gallery-image" accept="image/*" multiple>
+            <button id="gallery-upload-btn">Upload</button>
+        </div>
+        <div id="gallery-preview" class="preview-container">
+            <p>No images added yet.</p>
+        </div>
+    </section>
+</main>
+</body>
+</html>

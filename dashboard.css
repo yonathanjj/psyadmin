@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.admin-panel {
+  display: flex;
+  min-height: 100vh;
+  background-color: #000; /* Black Background */
+  color: #fff; /* White Text */
+  font-family: 'Inknut Antiqua', serif;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #111; /* Darker Black for Sidebar */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  position: fixed;
+  top: -20px; /* Moved slightly up */
+  left: -250px; /* Initially hidden for mobile */
+  height: calc(100% + 20px); /* Ensures no visual cut-off */
+  transform: translateX(0);
+  transition: left 0.3s ease; /* Smooth slide-in */
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0; /* Slide in when open (mobile only) */
+}
+
+/* Always Visible Sidebar on PC */
+@media screen and (min-width: 769px) {
+  .sidebar {
+    left: 0; /* Sidebar always visible on desktop */
+  }
+
+  .hamburger {
+    display: none; /* Hide hamburger on PC */
+  }
+
+  main.content {
+    margin-left: 250px; /* Offset content for visible sidebar */
+  }
+}
+
+/* Logo */
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: -23.125rem; /* -450px / 16px */
+}
+
+.sidebar .logo img {
+  max-width: 120px; /* Adjusted size */
+  margin-bottom: -5rem; /* -80px / 16px */
+}
+
+/* Navigation Links */
+.nav-links a {
+  display: block;
+  padding: 10px 15px;
+  margin: 5px 0;
+  color: #fff; /* White Links */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #FFA500; /* Highlight on Hover */
+  color: #000; /* Black Text on Hover */
+}
+
+.nav-links a.active {
+  background-color: #FFA500; /* Active Page Highlight */
+  color: #000;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  text-align: center;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+
+/* Hamburger Menu for Mobile */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #FFA500;
+  color: #000;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block; /* Show hamburger menu on mobile */
+  }
+}
+
+/* Main Content */
+main.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a1a, #181818); /* Gradient background */
+  padding: 50px;
+  transition: margin-left 0.3s ease;
+}
+
+main h1 {
+  font-size: 3rem;
+  color: #FFA500;
+  margin-bottom: 40px;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+  background: linear-gradient(145deg, #252525, #1e1e1e); /* Subtle gradient */
+  color: #fff;
+  width: 100%;
+  max-width: 800px;
+  margin: 25px 0;
+  padding: 30px;
+  border-radius: 12px; /* Softer corners */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+  transition: transform 0.2s, box-shadow 0.2s; /* Hover effect transition */
+}
+
+.dashboard-section:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* More shadow on hover */
+}
+
+.dashboard-section h2 {
+  font-size: 1.8rem;
+  color: #FFA500;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Form Group Styling */
+.form-group {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  color: #ddd; /* Softer white */
+}
+
+.form-group input {
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #FFA500; /* Highlight on focus */
+  outline: none;
+}
+
+/* Button Styling */
+button {
+  background: linear-gradient(135deg, #FFA500, #FF8C00); /* Button gradient */
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #FF8C00, #FFA500); /* Reverse gradient on hover */
+  transform: scale(1.05); /* Slight zoom */
+}
+
+/* Preview Container Styling */
+.preview-container {
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px dashed #666; /* More noticeable border */
+  background: #2a2a2a;
+  border-radius: 10px;
+  color: #bbb; /* Softer gray */
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.preview-container p {
+  margin: 0;
+}
+
+/* Media Query for Mobile */
+@media screen and (max-width: 768px) {
+  main.content {
+    padding: 20px;
+  }
+
+  .dashboard-section {
+    padding: 20px;
+  }
+
+  main h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard-section h2 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}

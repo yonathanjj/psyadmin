@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="tickets.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="tickets.js"></script>
+</head>
+<body class="admin-panel" x-data="{ isOpen: false }">
+<!-- Hamburger Menu for Mobile -->
+<button class="hamburger" @click="isOpen = !isOpen">
+    ☰
+</button>
+
+<!-- Sidebar -->
+<div class="sidebar" :class="{ 'open': isOpen }">
+    <div class="logo">
+        <a href="#">
+            <img src="psy.png" alt="Admin Logo"> <!-- Add your logo image here -->
+        </a>
+    </div>
+
+    <!-- Sidebar navigation links with Alpine.js state for active page -->
+    <nav class="nav-links" x-data="{ activePage: window.location.pathname.split('/').pop().split('.')[0] }">
+        <a href="dashboard.html"
+           :class="{ 'active': activePage === 'dashboard' }"
+           @click="activePage = 'dashboard'">Dashboard</a>
+        <a href="tickets.html"
+           :class="{ 'active': activePage === 'tickets' }"
+           @click="activePage = 'tickets'">Tickets</a>
+        <a href="eventsmanagment.html"
+           :class="{ 'active': activePage === 'eventsmanagment' }"
+           @click="activePage = 'eventsmanagment'">Events Management</a>
+        <a href="qr.html"
+           :class="{ 'active': activePage === 'scanner' }"
+           @click="activePage = 'scanner'">QR Code Scanner</a>
+        <a href="setting.html"
+           :class="{ 'active': activePage === 'settings' }"
+           @click="activePage = 'settings'">Settings</a>
+    </nav>
+
+    <footer class="sidebar-footer">
+        &copy; 2024 Admin Panel
+    </footer>
+</div>
+
+
+<main class="content">
+    <h1>Manage Your Tickets</h1>
+
+    <!-- Add Ticket Section -->
+    <section class="dashboard-section">
+        <h2>Add New Ticket</h2>
+        <form id="add-ticket-form">
+            <div class="form-group">
+                <label for="event-name">Event Name</label>
+                <input type="text" id="event-name" name="event-name" required />
+            </div>
+            <div class="form-group">
+                <label for="ticket-status">Status</label>
+                <select id="ticket-status" name="ticket-status" required>
+                    <option value="Available">Available</option>
+                    <option value="Sold">Sold</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="event-date">Event Date</label>
+                <input type="date" id="event-date" name="event-date" required />
+            </div>
+            <button type="submit">Add Ticket</button>
+        </form>
+    </section>
+
+    <!-- Tickets List Section -->
+    <section class="dashboard-section">
+        <h2>Tickets List</h2>
+
+        <!-- Wrapper for controls (search box, filter) -->
+        <div class="ticket-controls">
+            <div class="search-bar">
+                <input type="text" id="search-box" placeholder="Search by event name" />
+            </div>
+            <div class="filter-status">
+                <select id="filter-dropdown">
+                    <option value="all">All</option>
+                    <option value="sold">Sold</option>
+                    <option value="available">Available</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- List of tickets -->
+        <ul id="ticket-items">
+            <!-- Dynamically populated list of tickets will go here -->
+            <li class="ticket-item">
+                <p>Event 1</p>
+                <p>Status: Sold</p>
+            </li>
+            <li class="ticket-item">
+                <p>Event 2</p>
+                <p>Status: Available</p>
+            </li>
+            <li class="ticket-item">
+                <p>Event 3</p>
+                <p>Status: Cancelled</p>
+            </li>
+        </ul>
+    </section>
+
+</main>
+
+</body>
+</html>

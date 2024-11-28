@@ -1,0 +1,344 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.admin-panel {
+  display: flex;
+  min-height: 100vh;
+  background-color: #000; /* Black Background */
+  color: #fff; /* White Text */
+  font-family: 'Inknut Antiqua', serif;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #111; /* Darker Black for Sidebar */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  position: fixed;
+  top: -20px; /* Moved slightly up */
+  left: -250px; /* Initially hidden for mobile */
+  height: calc(100% + 20px); /* Ensures no visual cut-off */
+  transform: translateX(0);
+  transition: left 0.3s ease; /* Smooth slide-in */
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0; /* Slide in when open (mobile only) */
+}
+
+/* Always Visible Sidebar on PC */
+@media screen and (min-width: 769px) {
+  .sidebar {
+    left: 0; /* Sidebar always visible on desktop */
+  }
+
+  .hamburger {
+    display: none; /* Hide hamburger on PC */
+  }
+
+  main.content {
+    margin-left: 250px; /* Offset content for visible sidebar */
+  }
+}
+
+/* Logo */
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: -24.125rem; /* -450px / 16px */
+}
+
+.sidebar .logo img {
+  max-width: 120px; /* Adjusted size */
+  margin-bottom: -5rem; /* -80px / 16px */
+}
+
+/* Navigation Links */
+.nav-links a {
+  display: block;
+  padding: 10px 15px;
+  margin: 5px 0;
+  color: #fff; /* White Links */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #FFA500; /* Highlight on Hover */
+  color: #000; /* Black Text on Hover */
+}
+
+.nav-links a.active {
+  background-color: #FFA500; /* Active Page Highlight */
+  color: #000;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  text-align: center;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Hamburger Menu for Mobile */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #FFA500;
+  color: #000;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block; /* Show hamburger menu on mobile */
+  }
+}
+
+
+/* Main Content */
+main.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a1a, #181818);
+  padding: 40px;
+  min-height: 100vh; /* Ensures the content section takes full viewport height */
+  transition: margin-left 0.3s ease;
+}
+
+main h1 {
+  font-size: 2.5rem;
+  color: #FFA500;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Ticket Controls Section */
+.ticket-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 30px;
+}
+
+/* Enhanced Search Bar Input */
+.search-bar input {
+  width: 60%;
+  padding: 12px 15px;
+  border: 2px solid #444;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #3a3a3a, #222);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #FFA500;
+  outline: none;
+  transform: scale(1.05);
+  box-shadow: 2px 2px 15px rgba(255, 165, 0, 0.7);
+}
+
+/* Enhanced Filter Status Select */
+.filter-status select {
+  padding: 12px 15px;
+  border: 2px solid #444;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #3a3a3a, #222);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  appearance: none; /* Remove default dropdown appearance */
+  transition: border-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s ease;
+}
+
+.filter-status select:focus {
+  border-color: #FFA500;
+  color: #000;
+  outline: none;
+  transform: scale(1.05);
+  box-shadow: 2px 2px 15px rgba(255, 165, 0, 0.7);
+}
+
+/* Add Custom Dropdown Arrow */
+.filter-status select::after {
+  content: ' ▼';
+  color: #FFA500;
+  font-size: 1.2rem;
+  margin-left: -20px;
+  pointer-events: none; /* Ensures the arrow doesn't interfere with clicking */
+}
+
+/* Ticket List Section */
+.ticket-list {
+  width: 100%;
+  max-width: 800px;
+  background: #222;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  display: block; /* Ensures the section stays visible */
+}
+
+.ticket-list h2 {
+  font-size: 1.8rem;
+  color: #FFA500;
+  margin-bottom: 20px;
+}
+
+.ticket-item {
+  padding: 15px;
+  margin: 10px 0;
+  background: #000;
+  border-radius: 8px;
+  color: #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ticket-item p {
+  margin: 5px 0;
+}
+
+.ticket-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.ticket-actions button {
+  background: #FFA500;
+  color: #000;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.ticket-actions button:hover {
+  background: #ffb733;
+  transform: scale(1.05);
+}
+
+/* Recent Tickets Section */
+.recent-tickets {
+  width: 100%;
+  max-width: 800px;
+  background: #222;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  display: block; /* Ensures visibility */
+}
+
+.recent-tickets h2 {
+  font-size: 1.8rem;
+  color: #FFA500;
+  margin-bottom: 20px;
+}
+
+.recent-ticket-card {
+  background: #333;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .ticket-controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  main h1 {
+    font-size: 2rem;
+  }
+
+  .ticket-list h2,
+  .recent-tickets h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Add Ticket Section */
+.dashboard-section form {
+  display: flex;
+  flex-direction: column;
+  background: #333;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-section form .form-group {
+  margin-bottom: 15px;
+}
+
+.dashboard-section form label {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.dashboard-section form input,
+.dashboard-section form select {
+  padding: 10px;
+  margin-top: 5px;
+  background: #444;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 5px;
+}
+
+.dashboard-section form button {
+  background: #FFA500;
+  color: #000;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.dashboard-section form button:hover {
+  background: #ffb733;
+}

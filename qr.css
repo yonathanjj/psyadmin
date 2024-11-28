@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.admin-panel {
+  display: flex;
+  min-height: 100vh;
+  background-color: #000; /* Black Background */
+  color: #fff; /* White Text */
+  font-family: 'Inknut Antiqua', serif;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #111; /* Darker Black for Sidebar */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  position: fixed;
+  top: -20px; /* Moved slightly up */
+  left: -250px; /* Initially hidden for mobile */
+  height: calc(100% + 20px); /* Ensures no visual cut-off */
+  transform: translateX(0);
+  transition: left 0.3s ease; /* Smooth slide-in */
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0; /* Slide in when open (mobile only) */
+}
+
+/* Always Visible Sidebar on PC */
+@media screen and (min-width: 769px) {
+  .sidebar {
+    left: 0; /* Sidebar always visible on desktop */
+  }
+
+  .hamburger {
+    display: none; /* Hide hamburger on PC */
+  }
+
+  main.content {
+    margin-left: 250px; /* Offset content for visible sidebar */
+  }
+}
+
+/* Logo */
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: -24.125rem; /* -450px / 16px */
+}
+
+.sidebar .logo img {
+  max-width: 120px; /* Adjusted size */
+  margin-bottom: -5rem; /* -80px / 16px */
+}
+
+/* Navigation Links */
+.nav-links a {
+  display: block;
+  padding: 10px 15px;
+  margin: 5px 0;
+  color: #fff; /* White Links */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #FFA500; /* Highlight on Hover */
+  color: #000; /* Black Text on Hover */
+}
+
+.nav-links a.active {
+  background-color: #FFA500; /* Active Page Highlight */
+  color: #000;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  text-align: center;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Hamburger Menu for Mobile */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #FFA500;
+  color: #000;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block; /* Show hamburger menu on mobile */
+  }
+}
+
+/* Main Content */
+main.content {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Horizontally centered */
+  align-items: center; /* Vertically centered */
+  background-color: #181818;
+  transition: margin-left 0.3s ease;
+  flex-direction: column;
+  padding: 40px;
+}
+
+main h1 {
+  font-size: 2.5rem;
+  color: #FFA500;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* QR Scanner Section */
+.scanner-section {
+  width: 100%;
+  max-width: 800px;
+  background-color: #222;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.scanner {
+  background-color: #333;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.qr-video {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Status Section */
+.status {
+  margin-top: 20px;
+  color: #ddd;
+}
+
+.status h2 {
+  font-size: 1.5rem;
+  color: #FFA500;
+}
+
+#status-text {
+  color: #ffb733;
+}
+
+#ticket-info {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* Button Style */
+.scan-btn {
+  background-color: #FFA500;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.scan-btn:hover {
+  background-color: #ffb733;
+  transform: scale(1.05);
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  main.content {
+    padding: 20px;
+  }
+
+  .scanner-section {
+    padding: 15px;
+  }
+
+  .scan-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  #ticket-info {
+    font-size: 1rem;
+  }
+}

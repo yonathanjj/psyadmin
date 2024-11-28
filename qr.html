@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="qr.js"></script>
+</head>
+<body class="admin-panel" x-data="{ isOpen: false }">
+<!-- Hamburger Menu for Mobile -->
+<button class="hamburger" @click="isOpen = !isOpen">
+  ☰
+</button>
+
+<!-- Sidebar -->
+<div class="sidebar" :class="{ 'open': isOpen }">
+  <div class="logo">
+    <a href="#">
+      <img src="psy.png" alt="Admin Logo"> <!-- Add your logo image here -->
+    </a>
+  </div>
+
+  <!-- Sidebar navigation links with Alpine.js state for active page -->
+  <nav class="nav-links" x-data="{ activePage: window.location.pathname.split('/').pop().split('.')[0] }">
+    <a href="dashboard.html"
+       :class="{ 'active': activePage === 'dashboard' }"
+       @click="activePage = 'dashboard'">Dashboard</a>
+    <a href="tickets.html"
+       :class="{ 'active': activePage === 'tickets' }"
+       @click="activePage = 'tickets'">Tickets</a>
+    <a href="eventsmanagment.html"
+       :class="{ 'active': activePage === 'eventsmanagment' }"
+       @click="activePage = 'eventsmanagment'">Events Management</a>
+    <a href="qr.html"
+       :class="{ 'active': activePage === 'scanner' }"
+       @click="activePage = 'scanner'">QR Code Scanner</a>
+    <a href="setting.html"
+       :class="{ 'active': activePage === 'settings' }"
+       @click="activePage = 'settings'">Settings</a>
+  </nav>
+
+  <footer class="sidebar-footer">
+    &copy; 2024 Admin Panel
+  </footer>
+</div>
+
+<!-- Main Content -->
+<main class="content">
+  <h1>QR Code Scanner</h1>
+
+  <section class="scanner-section">
+    <!-- Video stream for QR scanning -->
+    <div class="scanner">
+      <video id="qr-video" class="qr-video" width="100%" height="auto"></video>
+    </div>
+
+    <!-- Status area -->
+    <div class="status">
+      <h2>Status: <span id="status-text">Waiting for scan...</span></h2>
+      <div id="ticket-info">
+        <p><strong>Event:</strong> <span id="event-name">N/A</span></p>
+        <p><strong>Ticket Holder:</strong> <span id="ticket-holder">N/A</span></p>
+        <p><strong>Ticket Status:</strong> <span id="ticket-status">Not Scanned</span></p>
+      </div>
+    </div>
+
+    <!-- Button to start/stop scanning -->
+    <button id="start-scan" class="scan-btn">Start Scanning</button>
+  </section>
+</main>
+
+
+</body>
+</html>
