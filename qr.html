@@ -22,28 +22,15 @@
     </a>
   </div>
 
-  <!-- Sidebar navigation links with Alpine.js state for active page -->
   <nav class="nav-links" x-data="{ activePage: window.location.pathname.split('/').pop().split('.')[0] }">
-    <a href="dashboard.html"
-       :class="{ 'active': activePage === 'dashboard' }"
-       @click="activePage = 'dashboard'">Dashboard</a>
-    <a href="tickets.html"
-       :class="{ 'active': activePage === 'tickets' }"
-       @click="activePage = 'tickets'">Tickets</a>
-    <a href="eventsmanagment.html"
-       :class="{ 'active': activePage === 'eventsmanagment' }"
-       @click="activePage = 'eventsmanagment'">Events Management</a>
-    <a href="qr.html"
-       :class="{ 'active': activePage === 'scanner' }"
-       @click="activePage = 'scanner'">QR Code Scanner</a>
-    <a href="setting.html"
-       :class="{ 'active': activePage === 'settings' }"
-       @click="activePage = 'settings'">Settings</a>
+    <a href="dashboard.html" :class="{ 'active': activePage === 'dashboard' }">Dashboard</a>
+    <a href="tickets.html" :class="{ 'active': activePage === 'tickets' }">Tickets</a>
+    <a href="eventsmanagment.html" :class="{ 'active': activePage === 'eventsmanagment' }">Events Management</a>
+    <a href="qr.html" :class="{ 'active': activePage === 'scanner' }">QR Code Scanner</a>
+    <a href="setting.html" :class="{ 'active': activePage === 'settings' }">Settings</a>
   </nav>
 
-  <footer class="sidebar-footer">
-    &copy; 2024 Admin Panel
-  </footer>
+  <footer class="sidebar-footer">© 2024 Admin Panel</footer>
 </div>
 
 <!-- Main Content -->
@@ -51,12 +38,10 @@
   <h1>QR Code Scanner</h1>
 
   <section class="scanner-section">
-    <!-- Video stream for QR scanning -->
     <div class="scanner">
       <video id="qr-video" class="qr-video" width="100%" height="auto"></video>
     </div>
 
-    <!-- Status area -->
     <div class="status">
       <h2>Status: <span id="status-text">Waiting for scan...</span></h2>
       <div id="ticket-info">
@@ -66,11 +51,17 @@
       </div>
     </div>
 
-    <!-- Button to start/stop scanning -->
     <button id="start-scan" class="scan-btn">Start Scanning</button>
   </section>
+
+  <!-- Simulating ticket list -->
+  <section id="ticket-list">
+    <h2>Available Tickets</h2>
+    <ul>
+      <li data-ticket-id="123456">Summer Concert 2024 - John Doe <img src="qr-code-123456.png" alt="QR Code for Ticket 123456"></li>
+      <li data-ticket-id="789101">Winter Festival 2024 - Jane Doe <img src="qr-code-789101.png" alt="QR Code for Ticket 789101"></li>
+    </ul>
+  </section>
 </main>
-
-
 </body>
 </html>
